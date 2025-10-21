@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="module"></script>
+    
+    <title>WeatherAPI</title>
+    <!-- Add stylesheets or meta tags here -->
+</head>
+<body>
+        <div class="ui container">
+            <h2 class="ui header">Weather Dashboard </h2>
+
+        <div class="ui segment">
+            <h3 class = "ui header"> Current Conditions</h3>
+            <div> Condition : <span id="condition-text"> Loading..</span></div>
+            <div> Temperature : <span id="temperature">--</span> °F</div>
+            <div> Pressure : <span id="pressure">--</span> inHg</div>
+            <div> Wind: <span id= "wind">--</span></div>
+            <div>Precip Chance: <span id="precip">--</span> %</div>
+            <div><img id = "Condition-icon" src="/" alt ="icon" style="width:48px;height:48px;"></div>
+        </div>
+        <!-- refresh button -->
+        <button class="ui primary button" id="refreshBtn">Refresh</button>
+        <input id="autoInterval" type="number" min="20" max="120" placeholder="20-120s" style="margin-left:.5rem;">
+  <button class="ui button" id="toggleAutoBtn">Enable Auto</button>
+        </div>
+
+        <div class = "ui segment">
+            <h3 class = "ui header"> Today</h3>
+            <div id="hourly"> Loading hourly...</div>
+        </div>
+        <div class = "ui segment">
+            <h3 class = "ui header"> 10 Day Forecast</h3>
+            <div id="daily"> Loading daily...</div>
+        </div>
+        <div id="status" style=" margin-top:0.5rem; color:#444;" >Status: idle</div>
+        </div>
+
+
+    
+</body>
+</html>
