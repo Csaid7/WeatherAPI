@@ -1,0 +1,42 @@
+body {
+    background-color: #f5f7fa;
+    padding: 20px 0;
+}
+
+.ui.container {
+    margin-top: 20px !important;
+}
+
+.ui.segment {
+    margin-bottom: 20px !important;
+}
+
+/* Make current conditions stand out */
+.ui.segment:first-of-type {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.ui.segment:first-of-type .ui.header {
+    color: white !important;
+}
+
+/* Style hourly forecast items */
+#hourly > div, #daily > div {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid #667eea;
+}
+
+/* Make buttons more visible */
+button {
+    margin-bottom: 20px !important;
+}
+
+/* Center and style the icon */
+#Condition-icon {
+    display: block;
+    margin: 10px 0;
+}

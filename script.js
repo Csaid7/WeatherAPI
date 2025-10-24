@@ -1,4 +1,21 @@
 let weatherData = null;
+// icon mapping
+// Icon mapping
+const iconMap = {
+    'clear-day': '☀️',
+    'clear-night': '🌙',
+    'cloudy': '☁️',
+    'partly-cloudy-day': '⛅',
+    'partly-cloudy-night': '☁️',
+    'rainy': '🌧️',
+    'possibly-rainy-day': '🌦️',
+    'possibly-rainy-night': '🌧️',
+    'snowy': '❄️',
+    'foggy': '🌫️',
+    'windy': '💨',
+    'thunderstorm': '⛈️'
+};
+
 // API Configuration
 const STATION_ID = "81414"; // 
 const TOKEN = "97b936d4-e681-4890-bc79-5d58010ea333";
@@ -6,7 +23,7 @@ const API_URL = 'https://swd.weatherflow.com/swd/rest/better_forecast';
 // Get references to HTML elements
 
 const refreshBtn = document.getElementById('refreshBtn');
-const toggleAutoBtn = document.getElementById('autoInterval');
+const toggleAutoBtn = document.getElementById('toggleAutoBtn');
 const statusDiv = document.getElementById('status');
 
 // URLSearchParams formats the parameters we want to send to the API
@@ -59,6 +76,9 @@ function updateCurrentConditions(data) {
     // Update temperature
     document.getElementById('temperature').textContent = current.air_temperature;
     
+    // update icon
+   const iconElement = document.getElementById('Condition-icon');
+iconElement.textContent = iconMap[current.icon] || '🌡️';
     // Update pressure
     document.getElementById('pressure').textContent = current.sea_level_pressure;
     
@@ -101,17 +121,41 @@ function updateDailyForecast(data) {
     }   
 }
 
-// ///later......
-// refreshBtn.addEventListener('click', function() {
-//     console.log('Refresh button clicked');
-//     fetchWeatherData();
-// } );
 
-// let myInterval = setInterval(function() {
-//     console.log('Auto-refreshing weather data');
-// },30000);
+///later......
+refreshBtn.addEventListener('click', function() {
+    console.log('Refresh button clicked');
+    fetchWeatherData();
+} );
 
-// // later ...
+ let autoIntervalId = null;
+ const intervalInput = document.getElementById('autoInterval');
+ 
+ toggleAutoBtn.addEventListener('click', function()  {
+ // check if auto refresh is already enabled
+    if (autoIntervalId === null){
+    // get the value from the input
+    const seconds =  intervalInput.value;
+        // validate the input
+    if(seconds === '' || seconds < 20 || seconds > 120){
+        alert ('Please enter a valid number between 20 and 120 seconds.');
+        return;// exit the function if invalid
+    }
+    const milliseconds = seconds * 1000;
+    
+    autoIntervalId = setInterval(fetchWeatherData, milliseconds);
+    toggleAutoBtn.textContent = 'Disable Auto';  // Change button text
+    console.log('Auto refresh enabled every', seconds, 'seconds');
 
-// clearInterval(myInterval);
-fetchWeatherData();
+    }else{
+        clearInterval(autoIntervalId);
+        autoIntervalId = null;
+        toggleAutoBtn.textContent = 'Enable Auto'; // Change button text
+        console.log('Auto refresh disabled');
+
+    }
+
+ });
+
+
+ fetchWeatherData();
